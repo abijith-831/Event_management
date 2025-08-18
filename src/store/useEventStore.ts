@@ -32,7 +32,7 @@ export const useEventStore = create<EventStore>()(
         set((state) => ({
           events: state.events.filter((_, i) => i !== index),
         })),
-        viewType: "card", // default
+        viewType: "card", 
       setViewType: (view) => set({ viewType: view }),
     }),
     { name: "event-storage" }

@@ -1,17 +1,18 @@
 'use client';
-import React, { useState } from 'react'
+import React from 'react'
 import { FiSearch } from 'react-icons/fi';
 import { useEventStore } from '../../src/store/useEventStore';
 
-
 const Header = () => {
-
   const { viewType, setViewType } = useEventStore();
 
   return (
-    <div>
-      <div className="flex items-center justify-between px-6 bg-white rounded-xl flex-[1] w-full gap-6">
-        <div className="flex items-center justify-between w-1/2">
+    <div className="w-full">
+      <div className="flex flex-col md:flex-row items-center justify-between px-4 md:px-6 bg-white rounded-xl gap-4 md:gap-6 py-4">
+        
+        {/* Left Section */}
+        <div className="flex flex-col md:flex-row items-center justify-between w-full md:w-1/2 gap-4">
+          {/* Search Bar */}
           <div className="relative w-full">
             <input
               type="text"
@@ -20,24 +21,25 @@ const Header = () => {
             />
             <FiSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
           </div>
-          <div className="ml-4">
-            <h1 className="text-gray-500">Monday, 6th March</h1>
+
+          {/* Date */}
+          <div className="ml-0 md:ml-4 text-center md:text-left">
+            <h1 className="text-gray-500 text-sm md:text-base">Monday, 6th March</h1>
           </div>
         </div>
 
-            
+        {/* Right Section (View Toggle) */}
+        <div className="w-full md:w-1/2 flex justify-center md:justify-end">
+          <div className="view-toggle-wrapper flex">
+          <div className="view-toggle-container"> 
+          <button className={`view-toggle-button font-bold ${viewType === 'card' ? 'active' : ''}`} onClick={() => setViewType('card')}> Card View</button>
+           <button className={`view-toggle-button font-bold ${viewType === 'list' ? 'active' : ''}`} onClick={() => setViewType('list')}> List View</button> </div>
+          </div>
+        </div>
 
-                <div className='w-1/2 flex justify-end'>
-                  <div className="view-toggle-wrapper flex mt-5 justify-end ">
-                    <div className="view-toggle-container">
-                      <button  className={`view-toggle-button font-bold ${viewType === 'card' ? 'active' : ''}`}  onClick={() => setViewType('card')}>  Card View</button>
-                      <button  className={`view-toggle-button font-bold ${viewType === 'list' ? 'active' : ''}`}  onClick={() => setViewType('list')}>  List View</button>
-                    </div>
-                  </div>
-                </div>
-                </div>
+      </div>
     </div>
   )
 }
 
-export default Header
+export default Header;

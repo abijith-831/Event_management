@@ -13,7 +13,7 @@ interface ListViewProps {
 
 const ListView: React.FC<ListViewProps> = ({ events, onDelete }) => {
   return (
-    <div>
+    <div className='scrollbar-hide scroll-smooth snap-x snap-mandatory'>
       {events.map((ev, idx) => (
         <div key={idx} className="flex justify-between items-center bg-gray-200 p-4 rounded mb-2">
           <span className='px-2'>{idx + 1} -</span>

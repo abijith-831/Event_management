@@ -7,7 +7,7 @@ import CardView from './CardView';
 
 const Tasks = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { events, addEvent, deleteEvent , viewType} = useEventStore();
+  const { events, addEvent, deleteEvent, viewType } = useEventStore();
 
   const handleSave = (event: { name: string; date: string }) => {
     addEvent(event);
@@ -15,41 +15,49 @@ const Tasks = () => {
 
   return (
     <div className="w-full p-4">
-      <div className="flex flex-row w-full justify-between">
-        <div className="flex flex-col w-1/2 py-4 justify-between px-12">
-          <h1 className="text-4xl px-6 font-bold">Events</h1>
-          <h4 className="px-6 mt-2">
-            {events.length} Total , Proceed to resolve them
+      {/* Header row */}
+      <div className="flex flex-col md:flex-row w-full justify-between gap-6">
+        {/* Left Section */}
+        <div className="flex flex-col flex-1 py-4 px-2 md:px-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">Events</h1>
+          <h4 className="mt-2 text-gray-600 text-sm sm:text-base">
+            {events.length} Total, proceed to resolve them
           </h4>
         </div>
-        <div className="flex gap-12 w-1/2 px-12 py-2 justify-end">
-          <div className="flex flex-col items-center justify-center">
-            <span className="text-4xl font-bold">44 </span>
-            <span className="text-gray-500">Done</span>
+
+        {/* Stats & Button */}
+        <div className="flex flex-col sm:flex-row flex-wrap gap-6 md:gap-12 items-center justify-end px-2 md:px-6 py-2">
+          <div className="flex flex-col items-center">
+            <span className="text-2xl sm:text-3xl md:text-4xl font-bold">44</span>
+            <span className="text-gray-500 text-sm sm:text-base">Done</span>
           </div>
-          <div className="flex flex-col items-center justify-center">
-            <span className="text-4xl font-bold">13</span>
-            <span className="text-gray-500">In Progress</span>
+          <div className="flex flex-col items-center">
+            <span className="text-2xl sm:text-3xl md:text-4xl font-bold">13</span>
+            <span className="text-gray-500 text-sm sm:text-base">In Progress</span>
           </div>
-          <div>
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="bg-black text-white px-6 py-2 rounded-full text-lg hover:bg-white hover:text-black hover:border hover:border-black"
-            >
-              Add Event
-            </button>
-          </div>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="bg-black text-white px-4 sm:px-6 py-2 rounded-full text-base sm:text-lg hover:bg-white hover:text-black hover:border hover:border-black transition"
+          >
+            Add Event
+          </button>
         </div>
       </div>
 
-      <div className="flex-1 mt-6 h-[300px] px-6 overflow-y-auto">
+      {/* Events View */}
+      {/* Events View */}
+      <div className="flex-1 mt-6 px-2 md:px-6">
         {viewType === 'list' ? (
-          <ListView events={events} onDelete={deleteEvent} />
-        ):(
-          <CardView events={events} onDelete={deleteEvent} />
+          <div className="overflow-y-auto flex-1 h-full max-h-full scrollbar-hide scroll-smooth snap-y snap-mandatory">
+            <ListView events={events} onDelete={deleteEvent} />
+          </div>
+        ) : (
+          <div className="overflow-x-auto flex-1 h-full max-h-full scrollbar-hide scroll-smooth snap-x snap-mandatory">
+            <CardView events={events} onDelete={deleteEvent} />
+          </div>
         )}
-        
       </div>
+
 
       {/* Modal */}
       <EventModal
