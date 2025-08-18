@@ -1,11 +1,12 @@
 'use client';
 import React, { useState } from 'react'
 import { FiSearch } from 'react-icons/fi';
+import { useEventStore } from '../../src/store/useEventStore';
 
 
 const Header = () => {
 
-    const [viewType, setViewType] = useState<'card' | 'list' | 'table'>('card');
+  const { viewType, setViewType } = useEventStore();
 
   return (
     <div>

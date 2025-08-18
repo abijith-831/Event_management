@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import EventModal from './EventModal';
 import ListView from './ListView';
 import { useEventStore } from '../../src/store/useEventStore';
+import CardView from './CardView';
 
 const Tasks = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { events, addEvent, deleteEvent } = useEventStore();
+  const { events, addEvent, deleteEvent , viewType} = useEventStore();
 
   const handleSave = (event: { name: string; date: string }) => {
     addEvent(event);
@@ -42,7 +43,12 @@ const Tasks = () => {
       </div>
 
       <div className="flex-1 mt-6 h-[300px] px-6 overflow-y-auto">
-        <ListView events={events} onDelete={deleteEvent} />
+        {viewType === 'list' ? (
+          <ListView events={events} onDelete={deleteEvent} />
+        ):(
+          <CardView events={events} onDelete={deleteEvent} />
+        )}
+        
       </div>
 
       {/* Modal */}
