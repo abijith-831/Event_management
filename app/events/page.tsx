@@ -2,11 +2,12 @@
 import React from 'react'
 import Header from '../Components/Header';
 import Tasks from '../Components/Tasks';
+import SideBar from '../Components/SideBar';
 
 const Page = () => {
   return (
     <div 
-      className='flex items-center justify-center min-h-screen px-4 md:px-16 bg-center bg-cover' 
+      className='flex items-center justify-center min-h-screen px-4 md:px-8 lg:px-16 py-4 bg-center bg-cover' 
       style={{ backgroundImage: "url('/bg/dark-bg.jpg')" }}
     >
       {/* Outer container */}
@@ -14,7 +15,7 @@ const Page = () => {
         
         {/* Left Sidebar */}
         <div className='w-full md:w-1/5 flex items-center justify-center bg-white rounded-xl p-4'>
-          <h1 className='text-lg font-bold'>Left</h1>
+          <SideBar/>
         </div>
         
         {/* Right Section */}
