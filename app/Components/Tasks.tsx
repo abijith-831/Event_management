@@ -1,32 +1,15 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import EventModal from './EventModal';
-import { FiTrash2 } from 'react-icons/fi';
 import ListView from './ListView';
-
-type MyEvent = {
-    name: string;
-    date: string;
-};
+import { useEventStore } from '../../src/store/useEventStore';
 
 const Tasks = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [events, setEvents] = useState<MyEvent[]>([]);
+  const { events, addEvent, deleteEvent } = useEventStore();
 
-  
-  
-  useEffect(() => {
-    const stored = localStorage.getItem('events');
-    if (stored) setEvents(JSON.parse(stored));
-  }, []);
-
-  const handleSave = (event: MyEvent) => {
-    const updated = [...events, event];
-    console.log('ipdatedddd',updated);
-    
-    setEvents(updated);
-
-    localStorage.setItem('events', JSON.stringify(updated));
+  const handleSave = (event: { name: string; date: string }) => {
+    addEvent(event);
   };
 
   return (
@@ -34,7 +17,9 @@ const Tasks = () => {
       <div className="flex flex-row w-full justify-between">
         <div className="flex flex-col w-1/2 py-4 justify-between px-12">
           <h1 className="text-4xl px-6 font-bold">Events</h1>
-          <h4 className='px-6 mt-2'>{events.length } Total , Proceed to resolve them</h4>
+          <h4 className="px-6 mt-2">
+            {events.length} Total , Proceed to resolve them
+          </h4>
         </div>
         <div className="flex gap-12 w-1/2 px-12 py-2 justify-end">
           <div className="flex flex-col items-center justify-center">
@@ -46,26 +31,28 @@ const Tasks = () => {
             <span className="text-gray-500">In Progress</span>
           </div>
           <div>
-            <button onClick={() => setIsModalOpen(true)}   className="bg-black text-white px-6 py-2 rounded-full text-lg hover:bg-white hover:text-black hover:border hover:border-black">  Add Event</button>
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="bg-black text-white px-6 py-2 rounded-full text-lg hover:bg-white hover:text-black hover:border hover:border-black"
+            >
+              Add Event
+            </button>
           </div>
         </div>
       </div>
+
       <div className="flex-1 mt-6 h-[300px] px-6 overflow-y-auto">
-        <ListView events={events}
-        onDelete={(idx: number) => {
-          const updated = events.filter((_, i) => i !== idx);
-          setEvents(updated);
-          localStorage.setItem('events', JSON.stringify(updated));
-        }}/>
+        <ListView events={events} onDelete={deleteEvent} />
       </div>
 
-
-
       {/* Modal */}
-      <EventModal isOpen={isModalOpen}  onClose={()=>setIsModalOpen(false)} onSave={handleSave} />
+      <EventModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSave={handleSave}
+      />
     </div>
   );
 };
 
 export default Tasks;
-

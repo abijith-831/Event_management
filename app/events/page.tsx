@@ -8,7 +8,7 @@ const Page = () => {
 
 
   return (
-    <div className='flex items-center justify-center bg-blue-400 h-screen px-16 bg-center' style={{ backgroundImage: "url('/bg/dark-bg.jpg')" }}>
+    <div className='flex items-center justify-center h-screen px-16 bg-center' style={{ backgroundImage: "url('/bg/dark-bg.jpg')" }}>
       {/* inner container should account for padding */}
       <div className='flex w-full h-[calc(100vh-4rem)] gap-4'>
         <div className='w-1/5 flex items-center justify-center bg-white rounded-xl'>

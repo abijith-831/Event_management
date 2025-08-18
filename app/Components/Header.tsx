@@ -9,20 +9,20 @@ const Header = () => {
 
   return (
     <div>
-<div className="flex items-center justify-between px-6 bg-white rounded-xl flex-[1] w-full gap-6">
-  <div className="flex items-center justify-between w-1/2">
-    <div className="relative w-full">
-      <input
-        type="text"
-        placeholder="Search.."
-        className="w-full pr-10 pl-4 py-2 rounded-full border border-gray-300 bg-gray-200"
-      />
-      <FiSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
-    </div>
-    <div className="ml-4">
-      <h1 className="text-gray-500">Monday, 6th March</h1>
-    </div>
-  </div>
+      <div className="flex items-center justify-between px-6 bg-white rounded-xl flex-[1] w-full gap-6">
+        <div className="flex items-center justify-between w-1/2">
+          <div className="relative w-full">
+            <input
+              type="text"
+              placeholder="Search.."
+              className="w-full pr-10 pl-4 py-2 rounded-full border border-gray-300 bg-gray-200"
+            />
+            <FiSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
+          </div>
+          <div className="ml-4">
+            <h1 className="text-gray-500">Monday, 6th March</h1>
+          </div>
+        </div>
 
             
 
