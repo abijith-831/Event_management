@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import EventModal from './EventModal';
 import { FiTrash2 } from 'react-icons/fi';
+import ListView from './ListView';
 
 type MyEvent = {
     name: string;
@@ -50,22 +51,13 @@ const Tasks = () => {
         </div>
       </div>
       <div className="flex-1 mt-6 h-[300px] px-6 overflow-y-auto">
-        {events.map((ev, idx) => (
-            <div key={idx} className="flex justify-between items-center bg-gray-200 p-4 rounded mb-2">
-            <span className='px-2'>{idx + 1} -  </span>
-            <span className="flex-1 text-left">   { ev.name}</span>
-            <span className="w-32 text-center">{ev.date}</span>
-
-            <button
-            onClick={() => {
-            const updated = events.filter((_, i) => i !== idx);
-            setEvents(updated);
-            localStorage.setItem('events', JSON.stringify(updated));
-            }}
-            className="text-red-500 hover:text-red-700" >   <FiTrash2 size={20} /> </button>
-            </div>
-        ))}
-        </div>
+        <ListView events={events}
+        onDelete={(idx: number) => {
+          const updated = events.filter((_, i) => i !== idx);
+          setEvents(updated);
+          localStorage.setItem('events', JSON.stringify(updated));
+        }}/>
+      </div>
 
 
 
