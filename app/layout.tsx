@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import NotistackProvider from "../src/Providers/NotistackProvider";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -24,7 +25,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body >
-        {children}
+        <NotistackProvider>
+          {children}
+        </NotistackProvider>
       </body>
     </html>
   );

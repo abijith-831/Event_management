@@ -4,13 +4,16 @@ import EventModal from './EventModal';
 import ListView from './ListView';
 import { useEventStore } from '../../src/store/useEventStore';
 import CardView from './CardView';
+import { useSnackbar } from 'notistack';
 
 const Tasks = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { events, addEvent, deleteEvent, viewType } = useEventStore();
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleSave = (event: { name: string; date: string }) => {
     addEvent(event);
+    enqueueSnackbar('Event added successfully!', { variant: 'success' });
   };
 
   return (

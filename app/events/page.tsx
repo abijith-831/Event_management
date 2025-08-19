@@ -6,10 +6,7 @@ import SideBar from '../Components/SideBar';
 
 const Page = () => {
   return (
-    <div 
-      className='flex items-center justify-center min-h-screen px-4 md:px-8 lg:px-16 py-4 bg-center bg-cover' 
-      style={{ backgroundImage: "url('/bg/dark-bg.jpg')" }}
-    >
+    <div  className='flex items-center justify-center min-h-screen px-4 md:px-8 lg:px-16 py-4 bg-center bg-cover'  style={{ backgroundImage: "url('/bg/dark-bg.jpg')" }} >
       {/* Outer container */}
       <div className='flex flex-col md:flex-row w-full min-h-[calc(100vh-4rem)] gap-4'>
         
