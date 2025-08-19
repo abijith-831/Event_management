@@ -5,15 +5,29 @@ import ListView from './ListView';
 import { useEventStore } from '../../src/store/useEventStore';
 import CardView from './CardView';
 import { useSnackbar } from 'notistack';
+import ConfirmModal from './ConfirmModal';
 
 const Tasks = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { events, addEvent, deleteEvent, viewType } = useEventStore();
   const { enqueueSnackbar } = useSnackbar();
+  const [deleteIdx, setDeleteIdx] = useState<number | null>(null);
 
   const handleSave = (event: { name: string; date: string }) => {
     addEvent(event);
     enqueueSnackbar('Event added successfully!', { variant: 'success' });
+  };
+
+  const handleDelete = (idx: number) => {
+    setDeleteIdx(idx); // open confirm modal
+  };
+
+  const confirmDelete = () => {
+    if (deleteIdx !== null) {
+      deleteEvent(deleteIdx);
+      enqueueSnackbar('Event deleted successfully!', { variant: 'info' });
+      setDeleteIdx(null);
+    }
   };
 
   return (
@@ -52,11 +66,11 @@ const Tasks = () => {
       <div className="flex-1 mt-6 px-2 md:px-6">
         {viewType === 'list' ? (
           <div className="overflow-y-auto flex-1 h-full max-h-full scrollbar-hide scroll-smooth snap-y snap-mandatory">
-            <ListView events={events} onDelete={deleteEvent} />
+            <ListView events={events} onDelete={handleDelete} />
           </div>
         ) : (
           <div className="overflow-x-auto flex-1 h-full max-h-full scrollbar-hide scroll-smooth snap-x snap-mandatory">
-            <CardView events={events} onDelete={deleteEvent} />
+            <CardView events={events} onDelete={handleDelete} />
           </div>
         )}
       </div>
@@ -67,6 +81,12 @@ const Tasks = () => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSave={handleSave}
+      />
+
+      <ConfirmModal
+        isOpen={deleteIdx !== null}
+        onClose={() => setDeleteIdx(null)}
+        onConfirm={confirmDelete}
       />
     </div>
   );
