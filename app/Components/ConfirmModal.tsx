@@ -14,6 +14,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
   onConfirm,
   message = "Are you sure you want to delete this?",
 }) => {
+
   if (!isOpen) return null;
 
   return (
@@ -23,21 +24,8 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
         <p className="text-gray-700 mb-6">{message}</p>
 
         <div className="flex justify-end gap-4">
-          <button
-            onClick={onClose}
-            className="px-4 py-2 rounded border border-gray-400 hover:bg-gray-100"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={() => {
-              onConfirm();
-              onClose();
-            }}
-            className="px-4 py-2 rounded bg-red-500 text-white hover:bg-red-600"
-          >
-            Delete
-          </button>
+          <button onClick={onClose} className="px-4 py-2 rounded border border-gray-400 hover:bg-gray-100" >   Cancel </button>
+          <button onClick={() => {   onConfirm();   onClose(); }} className="px-4 py-2 rounded bg-red-500 text-white hover:bg-red-600">  Delete</button>
         </div>
       </div>
     </div>
