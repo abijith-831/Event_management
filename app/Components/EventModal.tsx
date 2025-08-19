@@ -12,6 +12,7 @@ const EventModal: React.FC<EventModalProps> = ({ isOpen, onClose, onSave }) => {
 
   const [name, setName] = useState('');
   const [date, setDate] = useState('');
+  const [error , setError] = useState('')
 
   const handleSave = () => {
     if (name && date) {
@@ -20,7 +21,7 @@ const EventModal: React.FC<EventModalProps> = ({ isOpen, onClose, onSave }) => {
       setDate('');
       onClose();
     } else {
-      alert('Please enter name and date');
+      setError('Please enter both event name and date.');
     }
   };
 
@@ -37,6 +38,7 @@ const EventModal: React.FC<EventModalProps> = ({ isOpen, onClose, onSave }) => {
         <input  type="text"  value={name}  onChange={(e) => setName(e.target.value)}  placeholder="Event Name"  className="border p-2 w-full mb-4 rounded text-sm sm:text-base"/>
         <input  type="date"  value={date}  onChange={(e) => setDate(e.target.value)}  className="border p-2 w-full mb-4 rounded text-sm sm:text-base"/>
 
+        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
         {/* Buttons */}
         <div className="flex justify-between gap-4">
           <button  onClick={onClose}  className="flex-1 bg-white text-black border border-black px-4 py-2 rounded hover:bg-gray-200 text-sm sm:text-base">
