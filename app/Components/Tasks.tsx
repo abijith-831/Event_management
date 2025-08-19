@@ -9,7 +9,7 @@ import ConfirmModal from './ConfirmModal';
 
 const Tasks = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { events, addEvent, deleteEvent, viewType } = useEventStore();
+  const { events, addEvent, deleteEvent, viewType ,searchQuery} = useEventStore();
   const { enqueueSnackbar } = useSnackbar();
   const [deleteIdx, setDeleteIdx] = useState<number | null>(null);
 
@@ -29,6 +29,11 @@ const Tasks = () => {
       setDeleteIdx(null);
     }
   };
+
+  const filteredEvents = events.filter((event) =>
+    event.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    event.date.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="w-full p-4">
@@ -66,11 +71,11 @@ const Tasks = () => {
       <div className="flex-1 mt-6 px-2 md:px-6">
         {viewType === 'list' ? (
           <div className="overflow-y-auto flex-1 h-full max-h-full scrollbar-hide scroll-smooth snap-y snap-mandatory">
-            <ListView events={events} onDelete={handleDelete} />
+            <ListView events={filteredEvents} onDelete={handleDelete} />
           </div>
         ) : (
           <div className="overflow-x-auto flex-1 h-full max-h-full scrollbar-hide scroll-smooth snap-x snap-mandatory">
-            <CardView events={events} onDelete={handleDelete} />
+            <CardView events={filteredEvents} onDelete={handleDelete} />
           </div>
         )}
       </div>

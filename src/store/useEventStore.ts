@@ -17,6 +17,8 @@ type EventStore = {
   viewType: ViewType;
   setViewType: (view: ViewType) => void;
 
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
 
 };
 
@@ -34,6 +36,8 @@ export const useEventStore = create<EventStore>()(
         })),
         viewType: "card", 
       setViewType: (view) => set({ viewType: view }),
+      searchQuery: "",
+      setSearchQuery: (query) => set({ searchQuery: query }),
     }),
     { name: "event-storage" }
   )

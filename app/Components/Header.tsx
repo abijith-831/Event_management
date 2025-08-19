@@ -5,7 +5,7 @@ import { useEventStore } from '../../src/store/useEventStore';
 import { LayoutGrid, List } from "lucide-react"; 
 
 const Header = () => {
-  const { viewType, setViewType } = useEventStore();
+  const { viewType, setViewType ,searchQuery,setSearchQuery} = useEventStore();
 
   const today = new Date();
   const formattedDate = today.toLocaleDateString("en-US", {
@@ -25,8 +25,10 @@ const Header = () => {
           <div className="relative w-full">
             <input
               type="text"
+              value={searchQuery}
               placeholder="Search..."
               className="w-full pr-10 pl-4 py-2 rounded-full border border-gray-300 bg-gray-200"
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
             <FiSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
           </div>
